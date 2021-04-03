@@ -3,10 +3,12 @@ import XCTest
 
 final class RandKitTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(RandKit().text, "Hello, World!")
+        XCTAssertTrue(true)
+        var isaac = ISAAC()
+
+        for _ in 0 ..< 256 {
+            print(isaac.next())
+        }
     }
 
     static var allTests = [

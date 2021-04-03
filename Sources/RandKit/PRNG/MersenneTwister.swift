@@ -1,5 +1,3 @@
-import Foundation
-
 /// An implementation of the MT19937-64 Mersenne Twister.
 public struct MersenneTwister: RandomNumberGenerator {
     private var mt: [UInt64]
