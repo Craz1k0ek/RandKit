@@ -1,5 +1,5 @@
 /// An implementation of the ISAAC number generator.
-public struct ISAAC: RandomNumberGenerator {
+public struct ISAAC: CSPRNG {
     /// The initial state of the generator.
     private var state: [UInt64] = [UInt64](repeating: 0x9e3779b97f4a7c13, count: 8)
 
@@ -45,10 +45,14 @@ public struct ISAAC: RandomNumberGenerator {
         }
     }
 
+    public init<G: RandomNumberGenerator>(using generator: inout G) {
+        self.init(seed: (0 ..< 256).map { _ in UInt64.random(in: 0 ..< UInt64.max, using: &generator) })
+    }
+
     /// Initialize the generator using the system random number generator.
     public init() {
         var systemRandom = SystemRandomNumberGenerator()
-        self.init(seed: (0 ..< 256).map { _ in UInt64.random(in: 0 ..< UInt64.max, using: &systemRandom) })
+        self.init(using: &systemRandom)
     }
 
     /// Normalize the provided seed by removing superfluous elements or by appending required elements.

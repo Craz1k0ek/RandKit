@@ -1,5 +1,5 @@
 /// An implementation of the MT19937-64 Mersenne Twister.
-public struct MersenneTwister: RandomNumberGenerator {
+public struct MersenneTwister: PRNG {
     private var mt: [UInt64]
     private var index: UInt64
 
@@ -15,10 +15,14 @@ public struct MersenneTwister: RandomNumberGenerator {
         }
     }
 
+    public init<G: RandomNumberGenerator>(using generator: inout G) {
+        self.init(seed: generator.next())
+    }
+
     /// Initialize the twister using the system random number generator.
     public init() {
         var systemRandom = SystemRandomNumberGenerator()
-        self.init(seed: systemRandom.next())
+        self.init(using: &systemRandom)
     }
 
     /// Twist the twister, generating new data.
