@@ -49,12 +49,6 @@ public struct ISAAC: CSPRNG {
         self.init(seed: (0 ..< 256).map { _ in UInt64.random(in: 0 ..< UInt64.max, using: &generator) })
     }
 
-    /// Initialize the generator using the system random number generator.
-    public init() {
-        var systemRandom = SystemRandomNumberGenerator()
-        self.init(using: &systemRandom)
-    }
-
     /// Normalize the provided seed by removing superfluous elements or by appending required elements.
     /// - Parameter seed: The provided seed.
     /// - Returns: The normalized seed.

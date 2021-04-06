@@ -19,12 +19,6 @@ public struct MersenneTwister: PRNG {
         self.init(seed: generator.next())
     }
 
-    /// Initialize the twister using the system random number generator.
-    public init() {
-        var systemRandom = SystemRandomNumberGenerator()
-        self.init(using: &systemRandom)
-    }
-
     /// Twist the twister, generating new data.
     private mutating func twist() {
         for i in 0 ..< Self.n {
