@@ -5,12 +5,12 @@ public struct Xoshiro256: PRNG {
 
     /// Initialize the generator with a seed.
     /// - Parameter state: The seed.
-    init(state: (UInt64, UInt64, UInt64, UInt64)) {
-        self.state = state
+    init(seed: (UInt64, UInt64, UInt64, UInt64)) {
+        state = seed
     }
 
     public init<G: RandomNumberGenerator>(using generator: inout G) {
-        self.init(state: (generator.next(), generator.next(), generator.next(), generator.next()))
+        self.init(seed: (generator.next(), generator.next(), generator.next(), generator.next()))
     }
 
     public mutating func next() -> UInt64 {
