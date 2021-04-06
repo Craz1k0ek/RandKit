@@ -1,3 +1,8 @@
 # RandKit
 
-A description of this package.
+Swift only implementations of some random number generators. These also inherit from the `RandomNumberGenerator` protocol.
+
+- Mersenne Twister
+- ISAAC
+- Xoshiro256**
+- SplitMix64
