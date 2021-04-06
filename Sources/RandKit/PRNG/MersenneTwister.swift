@@ -3,7 +3,7 @@ public struct MersenneTwister: PRNG {
     private var mt: [UInt64]
     private var index: UInt64
 
-    /// Initialize the twister with a seed.
+    /// Initialize the generator with a seed.
     /// - Parameter seed: The seed.
     public init(seed: UInt64) {
         mt = [UInt64](repeating: 0, count: Int(Self.n))
@@ -19,7 +19,7 @@ public struct MersenneTwister: PRNG {
         self.init(seed: generator.next())
     }
 
-    /// Twist the twister, generating new data.
+    /// Twist the generator, generating new data.
     private mutating func twist() {
         for i in 0 ..< Self.n {
             let x = (mt[Int(i)] & Self.upperMask) + (mt[Int((i + 1) % Self.n)] & Self.lowerMask)
